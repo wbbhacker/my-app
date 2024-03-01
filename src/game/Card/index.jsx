@@ -5,9 +5,9 @@ const Card = (props) => {
     return (
         <div className="content">
             <div className={style['card-list']}>
-                {Object.keys(cards).map((key) => {
+                {Object.keys(cards).map((key, idx) => {
                     let Cp = cards[key];
-                    return <Cp style={{ width: 1 }}></Cp>;
+                    return <Cp style={{ width: 1 }} key={idx}></Cp>;
                 })}
             </div>
         </div>
