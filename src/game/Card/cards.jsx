@@ -41,6 +41,21 @@ import card37_icon from './img/card37.svg';
 import card38_icon from './img/card38.svg';
 import card39_icon from './img/card39.svg';
 
+// 梅花
+import card40_icon from './img/card40.svg';
+import card41_icon from './img/card41.svg';
+import card42_icon from './img/card42.svg';
+import card43_icon from './img/card43.svg';
+import card44_icon from './img/card44.svg';
+import card45_icon from './img/card45.svg';
+import card46_icon from './img/card46.svg';
+import card47_icon from './img/card47.svg';
+import card48_icon from './img/card48.svg';
+import card49_icon from './img/card49.svg';
+import card50_icon from './img/card50.svg';
+import card51_icon from './img/card51.svg';
+import card52_icon from './img/card52.svg';
+
 import { Card } from './component/cardCp';
 // 黑桃
 export function Card1(props) {
@@ -163,4 +178,46 @@ export function Card38(props) {
 }
 export function Card39(props) {
     return <Card icon={card39_icon} {...props}></Card>;
+}
+
+// 梅花
+
+export function Card40(props) {
+    return <Card icon={card40_icon} {...props}></Card>;
+}
+export function Card41(props) {
+    return <Card icon={card41_icon} {...props}></Card>;
+}
+export function Card42(props) {
+    return <Card icon={card42_icon} {...props}></Card>;
+}
+export function Card43(props) {
+    return <Card icon={card43_icon} {...props}></Card>;
+}
+export function Card44(props) {
+    return <Card icon={card44_icon} {...props}></Card>;
+}
+export function Card45(props) {
+    return <Card icon={card45_icon} {...props}></Card>;
+}
+export function Card46(props) {
+    return <Card icon={card46_icon} {...props}></Card>;
+}
+export function Card47(props) {
+    return <Card icon={card47_icon} {...props}></Card>;
+}
+export function Card48(props) {
+    return <Card icon={card48_icon} {...props}></Card>;
+}
+export function Card49(props) {
+    return <Card icon={card49_icon} {...props}></Card>;
+}
+export function Card50(props) {
+    return <Card icon={card50_icon} {...props}></Card>;
+}
+export function Card51(props) {
+    return <Card icon={card51_icon} {...props}></Card>;
+}
+export function Card52(props) {
+    return <Card icon={card52_icon} {...props}></Card>;
 }
