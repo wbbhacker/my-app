@@ -1,3 +1,9 @@
 .card{
     background-color: red;
 }
+.card-list{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    gap:2px;
+}
