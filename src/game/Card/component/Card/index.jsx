@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import styleClass from './cardCp.module.scss';
+import styleClass from './index.module.scss';
 
-export function Card(props) {
+export default function Card(props) {
     const { style, icon } = props;
     const [curStyle, setCurStyle] = useState({});
 

@@ -56,7 +56,7 @@ import card50_icon from './img/card50.svg';
 import card51_icon from './img/card51.svg';
 import card52_icon from './img/card52.svg';
 
-import { Card } from './component/cardCp';
+import Card from './Card';
 // 黑桃
 export function Card1(props) {
     return <Card icon={card1_icon} {...props}></Card>;
