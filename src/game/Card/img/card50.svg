@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="540" width="360">
-    <g xmlns="http://www.w3.org/2000/svg" transform="translate(0 -513)">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540">
+
+    <g xmlns="http://www.w3.org/2000/svg" transform="translate(-3930 -1740)">
         <path
             d="M30.437.496h299.126c16.583 0 29.94 13.358 29.94 29.941v479.126c0 16.583-13.357 29.94-29.94 29.94H30.437c-16.583 0-29.94-13.357-29.94-29.94V30.437c0-16.583 13.357-29.94 29.94-29.94z"
             style="fill:#fff;fill-opacity:1;fill-rule:nonzero;stroke:#000;stroke-width:.99212599px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -638,4 +639,5 @@
 
 
     </g>
+
 </svg>
