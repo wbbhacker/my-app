@@ -99,6 +99,7 @@ function CardBox(props, ref) {
         console.log(`Press：${idx}`);
         console.log(selectedCard);
         if (idx !== selectedCard) {
+            onCb(cardSequence[idx]);
             cardSequence.splice(idx, 1);
             setCardSequence([...cardSequence]);
             if (selectedCard !== undefined) {
