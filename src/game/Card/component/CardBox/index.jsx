@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+    forwardRef,
+    useImperativeHandle,
+    useRef,
+    useLayoutEffect,
+} from 'react';
 import styleClass from './index.module.scss';
 import cardAll from '../cards';
 import ReactHammer from 'react-hammerjs';
 const Card1 = cardAll[0];
 
-const CW = 1; // 重叠 x rem
+const CW = 1.5; // 重叠 x rem
 const CH = 1; // 凸显出来 x rem
-
-function CardBox(props) {
+const WW = 5.5; // 宽度
+function CardBox(props, ref) {
     /*********************布局*********************/
 
     const [height, setHeight] = useState(4);
@@ -18,13 +25,14 @@ function CardBox(props) {
 
     useEffect(() => {
         const w = (height * 360) / 540;
+        const r = (52 - 1) * w - (52 - 1) * CW;
         setWidth(w);
-        setRRright((52 - 1) * w - (52 - 1) * CW);
+        setRRright(r);
     }, [height]);
 
-    /*********************布局*********************/
+    /*********************卡牌顺序*********************/
     const { sequence } = props;
-    const [cardSequence, setCardSequence] = useState(new Array(52).fill(-1));
+    const [cardSequence, setCardSequence] = useState([]);
 
     useEffect(() => {
         if (sequence.length > 0) {
@@ -32,11 +40,46 @@ function CardBox(props) {
         }
     }, [sequence]);
 
+    /*********************滚动*********************/
+    const listRef = useRef();
+    const boxRef = useRef();
+
+    useLayoutEffect(() => {
+        if (sequence.length > 0) {
+            boxRef.current.scrollLeft =
+                listRef.current.children[sequence.length - 1].offsetLeft;
+        }
+    }, [sequence]);
+    useLayoutEffect(() => {
+        boxRef.current.scrollLeft = listRef.current.children[0].offsetLeft;
+        console.log();
+    }, []);
+
+    /*********************hook*********************/
+
+    useImperativeHandle(
+        ref,
+        () => {
+            return {
+                add: () => {
+                    console.count('add');
+                },
+            };
+        },
+        []
+    );
+
     /*********************callback*********************/
     const handleDoubleTap = (Card, idx) => {
-        setSelectedCard(idx);
+        if (selectedCard === idx) {
+            setSelectedCard(undefined);
+        } else {
+            setSelectedCard(idx);
+        }
         console.log(`double top${idx}`);
     };
+
+    /*********************render*********************/
 
     const renderCard = (idx) => {
         let CardIdx = cardSequence[idx];
@@ -46,10 +89,12 @@ function CardBox(props) {
 
     return (
         <div
+            ref={boxRef}
             className={styleClass['card-box']}
-            style={{ height: `${height + CH}rem` }}
+            style={{ height: `${height + CH}rem`, width: `${WW}rem` }}
         >
             <div
+                ref={listRef}
                 className={styleClass['card-list']}
                 style={{
                     width: `${width * 52 - CW * 51}rem`,
@@ -61,7 +106,7 @@ function CardBox(props) {
                 {cardAll.map((Card, idx) => {
                     return (
                         <>
-                            {cardSequence[idx] !== -1 ? (
+                            {cardSequence[idx] !== undefined ? (
                                 <ReactHammer
                                     onDoubleTap={() => {
                                         handleDoubleTap(Card, idx);
@@ -108,4 +153,4 @@ function CardBox(props) {
     );
 }
 
-export default React.memo(CardBox);
+export default React.memo(forwardRef(CardBox));
