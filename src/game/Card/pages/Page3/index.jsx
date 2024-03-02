@@ -47,7 +47,12 @@ const Page3 = (props, ref) => {
                     <Timer ref={timerRef}></Timer>
                 </div>
                 <div>
-                    <Button color="primary" fill="outline" onClick={endHandle}>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={endHandle}
+                        size="minie"
+                    >
                         记忆完成
                     </Button>
                 </div>
