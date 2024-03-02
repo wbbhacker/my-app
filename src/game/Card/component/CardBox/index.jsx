@@ -21,8 +21,6 @@ function CardBox(props, ref) {
     const [width, setWidth] = useState(2);
     const [rRight, setRRright] = useState(0);
 
-    const [selectedCard, setSelectedCard] = useState(-1);
-
     useEffect(() => {
         const w = (height * 360) / 540;
         const r = (52 - 1) * w - (52 - 1) * CW;
@@ -45,11 +43,11 @@ function CardBox(props, ref) {
     const boxRef = useRef();
 
     useLayoutEffect(() => {
-        if (sequence.length > 0) {
+        if (cardSequence.length > 0) {
             boxRef.current.scrollLeft =
-                listRef.current.children[sequence.length - 1].offsetLeft;
+                listRef.current.children[cardSequence.length - 1].offsetLeft;
         }
-    }, [sequence]);
+    }, [cardSequence]);
     useLayoutEffect(() => {
         boxRef.current.scrollLeft = listRef.current.children[0].offsetLeft;
         console.log();
@@ -70,13 +68,32 @@ function CardBox(props, ref) {
     );
 
     /*********************callback*********************/
+    // 双击选择
+    const [selectedCard, setSelectedCard] = useState(-1);
+
     const handleDoubleTap = (Card, idx) => {
         if (selectedCard === idx) {
             setSelectedCard(undefined);
         } else {
+            console.log(`selected：${idx}`);
             setSelectedCard(idx);
         }
-        console.log(`double top${idx}`);
+        console.log(`double top：${idx}`);
+    };
+
+    // 按压删除
+    const onPress = (idx) => {
+        console.log(`Press：${idx}`);
+        console.log(selectedCard);
+        if (idx !== selectedCard) {
+            cardSequence.splice(idx, 1);
+            setCardSequence([...cardSequence]);
+            if (selectedCard !== undefined) {
+                if (selectedCard > idx) {
+                    setSelectedCard(selectedCard - 1);
+                }
+            }
+        }
     };
 
     /*********************render*********************/
@@ -110,6 +127,9 @@ function CardBox(props, ref) {
                                 <ReactHammer
                                     onDoubleTap={() => {
                                         handleDoubleTap(Card, idx);
+                                    }}
+                                    onPress={() => {
+                                        onPress(idx);
                                     }}
                                     key={idx}
                                     options={{
