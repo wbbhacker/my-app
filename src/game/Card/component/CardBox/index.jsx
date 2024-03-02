@@ -49,10 +49,6 @@ function CardBox(props, ref) {
         }
     }, [cardSequence]);
 
-    useLayoutEffect(() => {
-        boxRef.current.scrollLeft = 40000;
-    }, [cardSequence]);
-
     /*********************hook*********************/
     const [selectedCard, setSelectedCard] = useState(undefined);
     const { onCb } = props;
@@ -97,6 +93,11 @@ function CardBox(props, ref) {
     // 按压删除
     const { onlyShow } = props;
 
+    useLayoutEffect(() => {
+        if (onlyShow) {
+            boxRef.current.scrollLeft = 40000;
+        }
+    }, [cardSequence]);
     const onPress = (idx) => {
         console.log(`Press：${idx}`);
         console.log(selectedCard);
