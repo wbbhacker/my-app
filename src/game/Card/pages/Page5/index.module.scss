@@ -12,6 +12,20 @@
         flex-direction: row;
         height: 1rem;
         justify-content: center;
+        >div:nth-child(1){
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex:1
+        }
+        >div:nth-child(2){
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex:1;
+        }
     }
     .body{
         flex:1;

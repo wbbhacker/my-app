@@ -9,17 +9,31 @@ import React, {
 import _ from 'lodash';
 import styleClass from './index.module.scss';
 import CardBoxResult from '../../component/CardBoxResult';
+import { Button } from 'antd-mobile';
 
 const cardsSe = [];
 for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
 }
+const endHandle = () => {};
 const Page5 = () => {
     const [sequence, setSequence] = useState(cardsSe);
 
     return (
         <div className={styleClass.page}>
-            <div className={styleClass.header}></div>
+            <div className={styleClass.header}>
+                <div></div>
+                <div>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={endHandle}
+                        size="mini"
+                    >
+                        再次训练
+                    </Button>
+                </div>
+            </div>
             <div className={styleClass.body}>
                 <div className={styleClass.result}>
                     <div className={styleClass.item}>
