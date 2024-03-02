@@ -14,7 +14,7 @@ import Timer from '../../component/Timer';
 import CardBox from '../../component/CardBox';
 
 const Page3 = (props, ref) => {
-    const { onEnd, currentNumber } = props;
+    const { onEnd, currentNumber, allNumber } = props;
     const [sequence, setSequence] = useState([]);
     const timerRef = useRef();
     useImperativeHandle(
@@ -56,10 +56,15 @@ const Page3 = (props, ref) => {
                         记忆完成
                     </Button>
                 </div>
-                <div className={styleClass.number}>
-                    第<span style={{ color: 'red' }}>{currentNumber + 1}</span>
-                    副
-                </div>
+                {allNumber > 1 ? (
+                    <div className={styleClass.number}>
+                        第
+                        <span style={{ color: 'red' }}>
+                            {currentNumber + 1}
+                        </span>
+                        副
+                    </div>
+                ) : null}
             </div>
             <div className={styleClass.body}>
                 <CardBox sequence={sequence} onlyShow={true}></CardBox>

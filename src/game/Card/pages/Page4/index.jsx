@@ -19,7 +19,7 @@ for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
 }
 const Page4 = (props, ref) => {
-    const { onEnd, currentNumber } = props;
+    const { onEnd, currentNumber, allNumber } = props;
     const [sequence, setSequence] = useState([]);
     const cardBoxRef = useRef();
 
@@ -83,10 +83,15 @@ const Page4 = (props, ref) => {
                         作答完成
                     </Button>
                 </div>
-                <div className={styleClass.number}>
-                    第<span style={{ color: 'red' }}>{currentNumber + 1}</span>
-                    副
-                </div>
+                {allNumber > 1 ? (
+                    <div className={styleClass.number}>
+                        第
+                        <span style={{ color: 'red' }}>
+                            {currentNumber + 1}
+                        </span>
+                        副
+                    </div>
+                ) : null}
             </div>
             <div className={styleClass.body}>
                 <CardBox

@@ -69,6 +69,7 @@ const Card = (props) => {
         let m1;
         console.log(t);
         if (!memoryTime) {
+            m1 = m;
             setMemoryTime(m);
         } else {
             m1 = memoryTime.add(m);
@@ -120,6 +121,7 @@ const Card = (props) => {
         console.log(t);
         answerArray.push(arr);
         if (!answerTime) {
+            m1 = m;
             setAnswerTime(m);
         } else {
             m1 = answerTime.add(m);
@@ -158,6 +160,7 @@ const Card = (props) => {
     const startClick = () => {
         const arr = _.shuffle(cardsSe);
         const arr1 = _.shuffle(cardsSe);
+        const arr2 = _.shuffle(cardsSe);
         setMemoryArray([arr, arr1]);
         setPage3Show(true);
     };
@@ -173,6 +176,7 @@ const Card = (props) => {
                     onEnd={page3End}
                     sequence={sequence}
                     currentNumber={currentNumber}
+                    allNumber={memoryArray.length}
                 ></Page3>
             ) : null}
             {page4Show ? (
@@ -180,6 +184,7 @@ const Card = (props) => {
                     currentNumber={currentNumber}
                     ref={page4Ref}
                     onEnd={page4End}
+                    allNumber={memoryArray.length}
                 ></Page4>
             ) : null}
             {page5Show ? (

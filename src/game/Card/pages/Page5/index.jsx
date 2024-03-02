@@ -127,7 +127,7 @@ const Page5 = (props, ref) => {
                 <div className={styleClass.result}>
                     <div className={styleClass.item}>
                         <div className={styleClass.name}>得分:</div>
-                        <div className={styleClass.value}>{score}</div>
+                        <div className={styleClass.value}>{`${score}分`}</div>
                     </div>
                     <div className={styleClass.item}>
                         <div className={styleClass.name}>记忆时间:</div>
