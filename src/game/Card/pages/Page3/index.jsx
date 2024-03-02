@@ -12,12 +12,9 @@ import { Button } from 'antd-mobile';
 import styleClass from './index.module.scss';
 import Timer from '../../component/Timer';
 import CardBox from '../../component/CardBox';
-const cardsSe = [];
-for (let i = 0; i <= 51; i++) {
-    cardsSe.push(i);
-}
+
 const Page3 = (props, ref) => {
-    const { onEnd } = props;
+    const { onEnd, currentNumber } = props;
     const [sequence, setSequence] = useState([]);
     const timerRef = useRef();
     useImperativeHandle(
@@ -25,14 +22,17 @@ const Page3 = (props, ref) => {
         () => {
             return {
                 start: (cb) => {
-                    const arr = _.shuffle(cardsSe);
                     timerRef.current.start();
-                    setSequence(arr);
                 },
             };
         },
         []
     );
+    useEffect(() => {
+        if (props.sequence.length > 0) {
+            setSequence(props.sequence);
+        }
+    }, [props.sequence]);
 
     const endHandle = () => {
         timerRef.current.end((m) => {
@@ -55,6 +55,10 @@ const Page3 = (props, ref) => {
                     >
                         记忆完成
                     </Button>
+                </div>
+                <div className={styleClass.number}>
+                    第<span style={{ color: 'red' }}>{currentNumber + 1}</span>
+                    副
                 </div>
             </div>
             <div className={styleClass.body}>

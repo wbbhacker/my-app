@@ -22,8 +22,9 @@ const Timer = (props, ref) => {
         let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
             m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
         }`;
-
-        timerLabelRef.current.innerHTML = t;
+        if (timerLabelRef.current) {
+            timerLabelRef.current.innerHTML = t;
+        }
         requestAnimationFrame(update);
     };
 
