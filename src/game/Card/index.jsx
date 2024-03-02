@@ -18,56 +18,7 @@ const arr = _.shuffle(cardsSe);
 console.log(arr);
 
 const Card = (props) => {
-    const [sequence, setSequence] = useState([]);
-    const cardBoxRef = useRef();
-    const cardSquareRef = useRef();
-    const timerRef = useRef();
-
-    useEffect(() => {
-        // setSequence(_.shuffle(cardsSe));
-        // setSequence([...sequence.push(arr.pop())]);
-    }, []);
-
-    /*********************callback*********************/
-    const addHandle = () => {
-        let elem = arr.pop();
-        sequence.push(elem);
-        setSequence([...sequence]);
-        cardBoxRef.current.add();
-    };
-
-    //卡牌选择
-    const cardSelect = (Card, cardIdx) => {
-        cardBoxRef.current.add(cardIdx);
-    };
-    // 卡牌回填
-    const onAdd = () => {};
-
-    // 卡牌回填
-    const onCb = (idx) => {
-        cardSquareRef.current.add(idx);
-    };
-
-    // 计时开始
-
-    const startClick = () => {
-        timerRef.current.start();
-    };
-
-    const endClick = () => {
-        timerRef.current.end((m) => {
-            let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
-                m.milliseconds() < 100
-                    ? `0${m.milliseconds()}`
-                    : m.milliseconds()
-            }`;
-            console.log(t);
-        });
-    };
-
-    // ***********************
-
-    // page3
+    /******************** page3 *******************/
     const [page3Show, setPage3Show] = useState(false);
     const page3Ref = useRef();
     const page3End = (m) => {
@@ -81,7 +32,8 @@ const Card = (props) => {
         // page3Ref.current.start();
     }, []);
 
-    // page4
+    /******************** page4 *******************/
+
     const [page4Show, setPage4Show] = useState(true);
     const page4Ref = useRef();
     const page4End = (m) => {
@@ -96,20 +48,6 @@ const Card = (props) => {
     }, []);
     return (
         <div className="content">
-            <Timer ref={timerRef}></Timer>
-            <Button onClick={startClick}>Start</Button>
-            <Button onClick={endClick}>end</Button>
-            <CardBox sequence={sequence} ref={cardBoxRef} onCb={onCb}></CardBox>
-            {/* <Button color="primary" fill="solid" onClick={addHandle}>
-                添加
-            </Button> */}
-            <CardSquare
-                ref={cardSquareRef}
-                onClick={cardSelect}
-                onAdd={onAdd}
-            ></CardSquare>
-
-            {/* ********************************************************* */}
             {page3Show ? <Page3 ref={page3Ref} onEnd={page3End}></Page3> : null}
             {page4Show ? <Page4 ref={page4Ref} onEnd={page4End}></Page4> : null}
         </div>

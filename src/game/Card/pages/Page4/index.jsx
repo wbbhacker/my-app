@@ -67,7 +67,12 @@ const Page4 = (props, ref) => {
                     <Timer ref={timerRef}></Timer>
                 </div>
                 <div>
-                    <Button color="primary" fill="outline" onClick={endHandle}>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={endHandle}
+                        size="mini"
+                    >
                         作答完成
                     </Button>
                 </div>
@@ -78,6 +83,7 @@ const Page4 = (props, ref) => {
                     ref={cardBoxRef}
                     onCb={onCb}
                 ></CardBox>
+                <div className={styleClass.line}></div>
                 <CardSquare
                     ref={cardSquareRef}
                     onClick={cardSelect}
