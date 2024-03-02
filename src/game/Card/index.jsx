@@ -4,8 +4,9 @@ import { Button } from 'antd-mobile';
 import style from './index.module.scss';
 import CardBox from './component/CardBox';
 import Timer from './component/Timer';
-
 import CardSquare from './component/CardSquare';
+
+import Page3 from './pages/Page3';
 
 const cardsSe = [];
 for (let i = 0; i <= 51; i++) {
@@ -63,6 +64,20 @@ const Card = (props) => {
         });
     };
 
+    // ***********************
+
+    const page3Ref = useRef();
+    const page3End = (m) => {
+        let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
+            m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
+        }`;
+        console.log(t);
+    };
+
+    useEffect(() => {
+        page3Ref.current.start();
+    }, []);
+
     return (
         <div className="content">
             <Timer ref={timerRef}></Timer>
@@ -77,6 +92,9 @@ const Card = (props) => {
                 onClick={cardSelect}
                 onAdd={onAdd}
             ></CardSquare>
+
+            {/* ********************************************************* */}
+            <Page3 ref={page3Ref} onEnd={page3End}></Page3>
         </div>
     );
 };
