@@ -11,11 +11,26 @@ import styleClass from './index.module.scss';
 import { Button } from 'antd-mobile';
 
 const Page2 = (props, ref) => {
+    const [value, setValue] = useState(5);
     useImperativeHandle(
         ref,
         () => {
             return {
-                start: () => {},
+                start: (cb) => {
+                    let flag = 5;
+                    const timer = setInterval(() => {
+                        flag = flag - 1;
+                        if (flag === 0) {
+                            setValue('GO!!!');
+                            clearInterval(timer);
+                            setTimeout(() => {
+                                if (cb) cb();
+                            }, 500);
+                        } else {
+                            setValue(flag);
+                        }
+                    }, 700);
+                },
             };
         },
         []
@@ -23,8 +38,9 @@ const Page2 = (props, ref) => {
 
     return (
         <div className={styleClass.page}>
-            <div className={styleClass.header}></div>
-            <div className={styleClass.body}></div>
+            <div className={styleClass.body}>
+                <div>{value}</div>
+            </div>
         </div>
     );
 };

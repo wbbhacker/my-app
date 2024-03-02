@@ -77,6 +77,7 @@ const Card = (props) => {
     //     setMemoryArray([arr, arr1]);
     //     setPage3Show(true);
     // };
+
     const singleCb = (idx) => {
         let aaa = [];
         for (let i = 0; i < idx; i++) {
@@ -84,9 +85,19 @@ const Card = (props) => {
         }
         setMemoryArray(aaa);
         setPage1Show(false);
-        setPage3Show(true);
+        setPage2Show(true);
         console.log(idx);
     };
+
+    // page2 逻辑
+    useEffect(() => {
+        if (page2Show) {
+            page2Ref.current.start(() => {
+                setPage2Show(false);
+                setPage3Show(true);
+            });
+        }
+    }, [page2Show]);
 
     // page3 逻辑
     const [sequence, setSequence] = useState([]);

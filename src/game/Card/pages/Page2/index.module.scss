@@ -17,6 +17,12 @@
     }
     .body{
         flex:1;
-       
+        div{
+            font-size: 2rem;
+            position: absolute;
+            left:50%;
+            top:30%;
+            transform: translateX(-50%) translateY(-50%);
+        }
     }
 }
