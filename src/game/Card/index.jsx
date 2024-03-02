@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Button } from 'antd-mobile';
 import style from './index.module.scss';
 import CardBox from './component/CardBox';
+import Timer from './component/Timer';
 
 import CardSquare from './component/CardSquare';
 
@@ -18,6 +19,7 @@ const Card = (props) => {
     const [sequence, setSequence] = useState([]);
     const cardBoxRef = useRef();
     const cardSquareRef = useRef();
+    const timerRef = useRef();
 
     useEffect(() => {
         // setSequence(_.shuffle(cardsSe));
@@ -44,8 +46,16 @@ const Card = (props) => {
         cardSquareRef.current.add(idx);
     };
 
+    // 计时开始
+
+    const startClick = () => {
+        timerRef.current.start();
+    };
+
     return (
         <div className="content">
+            <Timer ref={timerRef}></Timer>
+            <Button onClick={startClick}>Start</Button>
             <CardBox sequence={sequence} ref={cardBoxRef} onCb={onCb}></CardBox>
             {/* <Button color="primary" fill="solid" onClick={addHandle}>
                 添加
