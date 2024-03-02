@@ -49,10 +49,6 @@ function CardBox(props, ref) {
         }
     }, [cardSequence]);
 
-    // useLayoutEffect(() => {
-    //     boxRef.current.scrollLeft = listRef.current.children[0].offsetLeft;
-    // }, []);
-
     /*********************hook*********************/
     const [selectedCard, setSelectedCard] = useState(undefined);
     const { onCb } = props;
@@ -78,7 +74,7 @@ function CardBox(props, ref) {
                 },
             };
         },
-        [selectedCard]
+        [selectedCard, cardSequence]
     );
 
     /*********************callback*********************/
@@ -95,9 +91,11 @@ function CardBox(props, ref) {
     };
 
     // 按压删除
+    const { onlyShow } = props;
     const onPress = (idx) => {
         console.log(`Press：${idx}`);
         console.log(selectedCard);
+        if (onlyShow) return;
         if (idx !== selectedCard) {
             onCb(cardSequence[idx]);
             cardSequence.splice(idx, 1);
