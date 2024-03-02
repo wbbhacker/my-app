@@ -52,10 +52,22 @@ const Card = (props) => {
         timerRef.current.start();
     };
 
+    const endClick = () => {
+        timerRef.current.end((m) => {
+            let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
+                m.milliseconds() < 100
+                    ? `0${m.milliseconds()}`
+                    : m.milliseconds()
+            }`;
+            console.log(t);
+        });
+    };
+
     return (
         <div className="content">
             <Timer ref={timerRef}></Timer>
             <Button onClick={startClick}>Start</Button>
+            <Button onClick={endClick}>end</Button>
             <CardBox sequence={sequence} ref={cardBoxRef} onCb={onCb}></CardBox>
             {/* <Button color="primary" fill="solid" onClick={addHandle}>
                 添加

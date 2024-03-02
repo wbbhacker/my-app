@@ -35,14 +35,20 @@ const Timer = (props, ref) => {
                     console.log(`计时开始：`);
                     setStart(moment(new Date()));
                 },
+                end: (cb) => {
+                    let n = moment(new Date());
+                    let m = moment.duration(n.diff(start));
+                    setStart(n);
+                    cb(m);
+                },
             };
         },
-        []
+        [start]
     );
 
     useEffect(() => {
         requestAnimationFrame(update);
     }, [start]);
-    return <div ref={timerLabelRef}></div>;
+    return <div className={styleClass.timer} ref={timerLabelRef}></div>;
 };
 export default React.memo(forwardRef(Timer));
