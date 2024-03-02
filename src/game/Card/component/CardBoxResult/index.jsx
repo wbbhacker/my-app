@@ -30,12 +30,27 @@ function CardBox(props, ref) {
     /*********************卡牌顺序*********************/
     const { sequence } = props; // 初始化牌的顺序
     const [cardSequence, setCardSequence] = useState([]);
+    const [zSequence, setZSequence] = useState([]);
+    const [calcWW, setCalcWW] = useState(52);
 
     useEffect(() => {
         if (sequence.length > 0) {
             setCardSequence(sequence);
+            console.log(sequence.length);
+            let wwww = sequence.length;
+            setCalcWW(wwww);
+            const w = (height * 360) / 540;
+            const r = (wwww - 1) * w - (wwww - 1) * CW;
+            setRRright(r);
         }
     }, [sequence]);
+
+    useEffect(() => {
+        if (props.zSequence.length > 0) {
+            console.log(props.zSequence);
+            setZSequence(props.zSequence);
+        }
+    }, [props.zSequence]);
 
     /*********************滚动*********************/
     const boxRef = useRef();
@@ -58,6 +73,11 @@ function CardBox(props, ref) {
         let Card = cardAll[CardIdx];
         return <Card style={{ width: width }}></Card>;
     };
+    const renderCard1 = (idx) => {
+        let CardIdx = zSequence[idx];
+        let Card = cardAll[CardIdx];
+        return <Card style={{ width: width }}></Card>;
+    };
 
     return (
         <div
@@ -69,7 +89,7 @@ function CardBox(props, ref) {
                 <div
                     className={styleClass['card-list']}
                     style={{
-                        width: `${width * 52 - CW * 51}rem`,
+                        width: `${width * calcWW - CW * (calcWW - 1)}rem`,
                         height: `${height}rem`,
                         marginTop: `${CH}rem`,
                     }}
@@ -82,7 +102,7 @@ function CardBox(props, ref) {
                                     <div
                                         style={{
                                             width: `${width}rem`,
-                                            zIndex: 52 - idx,
+                                            zIndex: calcWW - idx,
                                             left: `${
                                                 rRight - idx * (width - CW)
                                             }rem`,
@@ -96,7 +116,7 @@ function CardBox(props, ref) {
                                         key={idx}
                                         style={{
                                             width: `${width}rem`,
-                                            zIndex: 52 - idx,
+                                            zIndex: calcWW - idx,
                                             left: `${
                                                 rRight - idx * (width - CW)
                                             }rem`,
@@ -111,16 +131,16 @@ function CardBox(props, ref) {
                 <div
                     className={styleClass['card-list']}
                     style={{
-                        width: `${width * 52 - CW * 51}rem`,
+                        width: `${width * calcWW - CW * (calcWW - 1)}rem`,
                         height: `${height}rem`,
                         marginTop: `0.1rem`,
                     }}
                 >
                     {/* 最右边为第一张扑克 */}
-                    {cardSequence.map((Card, idx) => {
+                    {zSequence.map((Card, idx) => {
                         return (
                             <>
-                                {cardSequence[idx] !== undefined ? (
+                                {zSequence[idx] !== undefined ? (
                                     <div
                                         style={{
                                             width: `${width}rem`,
@@ -131,7 +151,7 @@ function CardBox(props, ref) {
                                             height: `${height}rem`,
                                         }}
                                     >
-                                        {renderCard(idx)}
+                                        {renderCard1(idx)}
                                     </div>
                                 ) : (
                                     <div

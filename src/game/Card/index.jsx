@@ -147,7 +147,12 @@ const Card = (props) => {
         console.log(arr);
     };
 
-    //
+    // page5 逻辑
+    useEffect(() => {
+        if (page5Show) {
+            page5Ref.current.calc();
+        }
+    }, [page5Show]);
 
     // 模拟操作
     const startClick = () => {
@@ -179,6 +184,7 @@ const Card = (props) => {
             ) : null}
             {page5Show ? (
                 <Page5
+                    ref={page5Ref}
                     onEnd={page5End}
                     memoryArray={memoryArray}
                     answerArray={answerArray}
