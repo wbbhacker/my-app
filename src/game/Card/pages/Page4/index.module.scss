@@ -5,10 +5,11 @@
     top:0;
     height: 100%;
     width:100%;
-    background-color:chartreuse;
+    background-color:#ddd;
     display: flex;
     flex-direction: column;
     .header{
+        position: relative;
         display: flex;
         flex-direction: row;
         height: 1rem;
@@ -27,6 +28,12 @@
             justify-content: center;
             flex-wrap: wrap;
             flex:1;
+        }
+        .number{
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translateX(-50%) translateY(-50%);
         }
     }
     .body{

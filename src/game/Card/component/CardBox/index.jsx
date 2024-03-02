@@ -60,7 +60,6 @@ function CardBox(props, ref) {
                 add: (CardIdx) => {
                     // 添加卡牌
                     console.log(`添加卡牌：${CardIdx}`);
-                    console.log(selectedCard);
                     if (selectedCard === undefined) {
                         cardSequence.push(CardIdx);
                         console.log(cardSequence);
@@ -71,6 +70,11 @@ function CardBox(props, ref) {
                         setSelectedCard(undefined);
                     }
                     // console.log(CardIdx);
+                },
+                end: (cb) => {
+                    cb([...cardSequence]);
+
+                    setCardSequence([]);
                 },
             };
         },

@@ -36,6 +36,9 @@ const CardSquare = (props, ref) => {
                     selectedCard[CardIdx] = false;
                     setSelectedCard({ ...selectedCard });
                 },
+                end: () => {
+                    setSelectedCard({});
+                },
             };
         },
         [selectedCard]

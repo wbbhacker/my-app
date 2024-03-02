@@ -22,12 +22,6 @@ const Card = (props) => {
 
     const [page4Show, setPage4Show] = useState(false);
     const page4Ref = useRef();
-    const page4End = (m) => {
-        let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
-            m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
-        }`;
-        console.log(t);
-    };
 
     useEffect(() => {
         // page4Ref.current.start();
@@ -81,6 +75,7 @@ const Card = (props) => {
             setMemoryTime(m1);
         }
         let len = memoryArray.length;
+
         console.log(currentNumber);
 
         if (currentNumber === len - 1) {
@@ -93,6 +88,8 @@ const Card = (props) => {
             console.log(t);
 
             setPage3Show(false);
+            setPage4Show(true);
+            setCurrentNumber(0);
         } else {
             const next = currentNumber + 1;
             setSequence(memoryArray[next]);
@@ -105,6 +102,52 @@ const Card = (props) => {
             page3Ref.current.start();
         }
     }, [page3Show]);
+
+    // page4 逻辑
+
+    useEffect(() => {
+        if (page4Show) {
+            page4Ref.current.start();
+        }
+    }, [page4Show]);
+
+    const page4End = (m, arr) => {
+        let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
+            m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
+        }`;
+
+        let m1;
+        console.log(t);
+        answerArray.push(arr);
+        if (!answerTime) {
+            setAnswerTime(m);
+        } else {
+            m1 = answerTime.add(m);
+            setAnswerTime(m1);
+        }
+        let len = memoryArray.length;
+        if (currentNumber === len - 1) {
+            console.log('总用时：');
+
+            let t = `${m1.hours()}.${m1.minutes()}.${m1.seconds()}.${
+                m1.milliseconds() < 100
+                    ? `0${m1.milliseconds()}`
+                    : m1.milliseconds()
+            }`;
+            console.log(t);
+            console.log(answerArray);
+            setPage4Show(false);
+            setPage5Show(true);
+            setCurrentNumber(0);
+        } else {
+            const next = currentNumber + 1;
+            setCurrentNumber(next);
+        }
+        console.log(t);
+        console.log(arr);
+    };
+
+    //
 
     // 模拟操作
     const startClick = () => {
@@ -127,8 +170,22 @@ const Card = (props) => {
                     currentNumber={currentNumber}
                 ></Page3>
             ) : null}
-            {page4Show ? <Page4 ref={page4Ref} onEnd={page4End}></Page4> : null}
-            {page5Show ? <Page5 onEnd={page5End}></Page5> : null}
+            {page4Show ? (
+                <Page4
+                    currentNumber={currentNumber}
+                    ref={page4Ref}
+                    onEnd={page4End}
+                ></Page4>
+            ) : null}
+            {page5Show ? (
+                <Page5
+                    onEnd={page5End}
+                    memoryArray={memoryArray}
+                    answerArray={answerArray}
+                    memoryTime={memoryTime}
+                    answerTime={answerTime}
+                ></Page5>
+            ) : null}
         </div>
     );
 };

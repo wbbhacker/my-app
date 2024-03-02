@@ -19,7 +19,7 @@ for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
 }
 const Page4 = (props, ref) => {
-    const { onEnd } = props;
+    const { onEnd, currentNumber } = props;
     const [sequence, setSequence] = useState([]);
     const cardBoxRef = useRef();
 
@@ -43,9 +43,16 @@ const Page4 = (props, ref) => {
     /*********************callback*********************/
     // 作答完成
     const endHandle = () => {
-        timerRef.current.end((m) => {
-            onEnd(m);
+        let arr = [];
+
+        cardBoxRef.current.end((a) => {
+            arr = a;
         });
+        timerRef.current.end((m) => {
+            onEnd(m, arr);
+        });
+
+        cardSquareRef.current.end();
     };
 
     // 卡牌选择
@@ -75,6 +82,10 @@ const Page4 = (props, ref) => {
                     >
                         作答完成
                     </Button>
+                </div>
+                <div className={styleClass.number}>
+                    第<span style={{ color: 'red' }}>{currentNumber + 1}</span>
+                    副
                 </div>
             </div>
             <div className={styleClass.body}>
