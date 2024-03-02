@@ -1,0 +1,22 @@
+.page{
+    position: absolute;
+    z-index: 999;
+    left:0;
+    top:0;
+    height: 100%;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ddd;
+    .header{
+        display: flex;
+        flex-direction: row;
+        height: 1rem;
+        justify-content: center;
+       
+    }
+    .body{
+        flex:1;
+       
+    }
+}

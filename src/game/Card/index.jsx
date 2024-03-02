@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import { Button } from 'antd-mobile';
-
+import Page1 from './pages/Page1';
+import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
 import Page4 from './pages/Page4';
 import Page5 from './pages/Page5';
@@ -10,6 +11,14 @@ for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
 }
 const Card = (props) => {
+    /******************** page1 *******************/
+    const [page1Show, setPage1Show] = useState(true);
+    const page1Ref = useRef();
+
+    /******************** page2 *******************/
+    const [page2Show, setPage2Show] = useState(false);
+    const page2Ref = useRef();
+
     /******************** page3 *******************/
     const [page3Show, setPage3Show] = useState(false);
     const page3Ref = useRef();
@@ -58,6 +67,26 @@ const Card = (props) => {
             setSequence(memoryArray[currentNumber]);
         }
     }, [memoryArray]);
+
+    // page1 逻辑
+    // 模拟操作
+    // const startClick = () => {
+    //     const arr = _.shuffle(cardsSe);
+    //     const arr1 = _.shuffle(cardsSe);
+    //     const arr2 = _.shuffle(cardsSe);
+    //     setMemoryArray([arr, arr1]);
+    //     setPage3Show(true);
+    // };
+    const singleCb = (idx) => {
+        let aaa = [];
+        for (let i = 0; i < idx; i++) {
+            aaa.push(_.shuffle(cardsSe));
+        }
+        setMemoryArray(aaa);
+        setPage1Show(false);
+        setPage3Show(true);
+        console.log(idx);
+    };
 
     // page3 逻辑
     const [sequence, setSequence] = useState([]);
@@ -156,20 +185,17 @@ const Card = (props) => {
         }
     }, [page5Show]);
 
-    // 模拟操作
-    const startClick = () => {
-        const arr = _.shuffle(cardsSe);
-        const arr1 = _.shuffle(cardsSe);
-        const arr2 = _.shuffle(cardsSe);
-        setMemoryArray([arr, arr1]);
-        setPage3Show(true);
-    };
-
     return (
         <div className="content">
-            <Button color="primary" fill="outline" onClick={startClick}>
+            {/* <Button color="primary" fill="outline" onClick={startClick}>
                 Start
-            </Button>
+            </Button> */}
+
+            {page1Show ? (
+                <Page1 ref={page1Ref} singleCb={singleCb}></Page1>
+            ) : null}
+            {page2Show ? <Page2 ref={page2Ref}></Page2> : null}
+
             {page3Show ? (
                 <Page3
                     ref={page3Ref}
