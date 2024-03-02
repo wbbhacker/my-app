@@ -5,6 +5,7 @@ import React, {
     useImperativeHandle,
     useRef,
     useLayoutEffect,
+    useCallback,
 } from 'react';
 import styleClass from './index.module.scss';
 import cardAll from '../cards';
@@ -53,6 +54,8 @@ function CardBox(props, ref) {
     // }, []);
 
     /*********************hook*********************/
+    const [selectedCard, setSelectedCard] = useState(undefined);
+    const { onCb } = props;
 
     useImperativeHandle(
         ref,
@@ -61,22 +64,25 @@ function CardBox(props, ref) {
                 add: (CardIdx) => {
                     // 添加卡牌
                     console.log(`添加卡牌：${CardIdx}`);
+                    console.log(selectedCard);
                     if (selectedCard === undefined) {
                         cardSequence.push(CardIdx);
                         console.log(cardSequence);
                         setCardSequence([...cardSequence]);
                     } else {
+                        onCb(cardSequence[selectedCard]);
+                        cardSequence.splice(selectedCard, 1, CardIdx);
+                        setSelectedCard(undefined);
                     }
                     // console.log(CardIdx);
                 },
             };
         },
-        []
+        [selectedCard]
     );
 
     /*********************callback*********************/
     // 双击选择
-    const [selectedCard, setSelectedCard] = useState(undefined);
 
     const handleDoubleTap = (Card, idx) => {
         if (selectedCard === idx) {

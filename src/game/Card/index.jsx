@@ -17,6 +17,7 @@ console.log(arr);
 const Card = (props) => {
     const [sequence, setSequence] = useState([]);
     const cardBoxRef = useRef();
+    const cardSquareRef = useRef();
 
     useEffect(() => {
         // setSequence(_.shuffle(cardsSe));
@@ -31,16 +32,29 @@ const Card = (props) => {
         cardBoxRef.current.add();
     };
 
+    //卡牌选择
     const cardSelect = (Card, cardIdx) => {
         cardBoxRef.current.add(cardIdx);
     };
+    // 卡牌回填
+    const onAdd = () => {};
+
+    // 卡牌回填
+    const onCb = (idx) => {
+        cardSquareRef.current.add(idx);
+    };
+
     return (
         <div className="content">
-            <CardBox sequence={sequence} ref={cardBoxRef}></CardBox>
+            <CardBox sequence={sequence} ref={cardBoxRef} onCb={onCb}></CardBox>
             {/* <Button color="primary" fill="solid" onClick={addHandle}>
                 添加
             </Button> */}
-            <CardSquare onClick={cardSelect}></CardSquare>
+            <CardSquare
+                ref={cardSquareRef}
+                onClick={cardSelect}
+                onAdd={onAdd}
+            ></CardSquare>
         </div>
     );
 };

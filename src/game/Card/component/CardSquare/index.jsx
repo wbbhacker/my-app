@@ -11,7 +11,7 @@ import ReactHammer from 'react-hammerjs';
 import styleClass from './index.module.scss';
 import cardAll from '../cards';
 
-const CardSquare = (props) => {
+const CardSquare = (props, ref) => {
     const [width, setWidth] = useState(0.6);
     const [selectedCard, setSelectedCard] = useState({});
 
@@ -26,6 +26,20 @@ const CardSquare = (props) => {
             setSelectedCard({ ...selectedCard });
         }
     };
+
+    useImperativeHandle(
+        ref,
+        () => {
+            return {
+                add: (CardIdx) => {
+                    console.log(`添加卡牌: ${CardIdx}`);
+                    selectedCard[CardIdx] = false;
+                    setSelectedCard({ ...selectedCard });
+                },
+            };
+        },
+        [selectedCard]
+    );
     return (
         <div className={styleClass.list}>
             {cardAll.map((Card, idx) => {
@@ -57,4 +71,4 @@ const CardSquare = (props) => {
     );
 };
 
-export default React.memo(CardSquare);
+export default React.memo(forwardRef(CardSquare));
