@@ -223,6 +223,7 @@ export function Card52(props) {
 }
 
 const cardAll = [
+    // 黑桃
     Card1,
     Card2,
     Card3,
@@ -236,6 +237,7 @@ const cardAll = [
     Card11,
     Card12,
     Card13,
+    // 红桃
     Card14,
     Card15,
     Card16,
@@ -249,19 +251,7 @@ const cardAll = [
     Card24,
     Card25,
     Card26,
-    Card27,
-    Card28,
-    Card29,
-    Card30,
-    Card31,
-    Card32,
-    Card33,
-    Card34,
-    Card35,
-    Card36,
-    Card37,
-    Card38,
-    Card39,
+    // 梅花
     Card40,
     Card41,
     Card42,
@@ -275,6 +265,20 @@ const cardAll = [
     Card50,
     Card51,
     Card52,
+    // 方片
+    Card27,
+    Card28,
+    Card29,
+    Card30,
+    Card31,
+    Card32,
+    Card33,
+    Card34,
+    Card35,
+    Card36,
+    Card37,
+    Card38,
+    Card39,
 ];
 
 export default cardAll;

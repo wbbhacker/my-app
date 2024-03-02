@@ -1,0 +1,12 @@
+.list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-self: left;
+    gap:2px;
+    .item{
+        border:0.5px solid #999;
+        border-radius: 2px;
+    }
+}

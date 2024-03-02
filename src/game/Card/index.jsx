@@ -4,6 +4,8 @@ import { Button } from 'antd-mobile';
 import style from './index.module.scss';
 import CardBox from './component/CardBox';
 
+import CardSquare from './component/CardSquare';
+
 const cardsSe = [];
 for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
@@ -28,12 +30,17 @@ const Card = (props) => {
         setSequence([...sequence]);
         cardBoxRef.current.add();
     };
+
+    const cardSelect = (Card, cardIdx) => {
+        cardBoxRef.current.add(cardIdx);
+    };
     return (
         <div className="content">
             <CardBox sequence={sequence} ref={cardBoxRef}></CardBox>
-            <Button color="primary" fill="solid" onClick={addHandle}>
+            {/* <Button color="primary" fill="solid" onClick={addHandle}>
                 添加
-            </Button>
+            </Button> */}
+            <CardSquare onClick={cardSelect}></CardSquare>
         </div>
     );
 };

@@ -9,7 +9,6 @@ import React, {
 import styleClass from './index.module.scss';
 import cardAll from '../cards';
 import ReactHammer from 'react-hammerjs';
-const Card1 = cardAll[0];
 
 const CW = 1.5; // 重叠 x rem
 const CH = 1; // 凸显出来 x rem
@@ -29,7 +28,7 @@ function CardBox(props, ref) {
     }, [height]);
 
     /*********************卡牌顺序*********************/
-    const { sequence } = props;
+    const { sequence } = props; // 初始化牌的顺序
     const [cardSequence, setCardSequence] = useState([]);
 
     useEffect(() => {
@@ -48,10 +47,10 @@ function CardBox(props, ref) {
                 listRef.current.children[cardSequence.length - 1].offsetLeft;
         }
     }, [cardSequence]);
-    useLayoutEffect(() => {
-        boxRef.current.scrollLeft = listRef.current.children[0].offsetLeft;
-        console.log();
-    }, []);
+
+    // useLayoutEffect(() => {
+    //     boxRef.current.scrollLeft = listRef.current.children[0].offsetLeft;
+    // }, []);
 
     /*********************hook*********************/
 
@@ -59,8 +58,16 @@ function CardBox(props, ref) {
         ref,
         () => {
             return {
-                add: () => {
-                    console.count('add');
+                add: (CardIdx) => {
+                    // 添加卡牌
+                    console.log(`添加卡牌：${CardIdx}`);
+                    if (selectedCard === undefined) {
+                        cardSequence.push(CardIdx);
+                        console.log(cardSequence);
+                        setCardSequence([...cardSequence]);
+                    } else {
+                    }
+                    // console.log(CardIdx);
                 },
             };
         },
@@ -69,7 +76,7 @@ function CardBox(props, ref) {
 
     /*********************callback*********************/
     // 双击选择
-    const [selectedCard, setSelectedCard] = useState(-1);
+    const [selectedCard, setSelectedCard] = useState(undefined);
 
     const handleDoubleTap = (Card, idx) => {
         if (selectedCard === idx) {
