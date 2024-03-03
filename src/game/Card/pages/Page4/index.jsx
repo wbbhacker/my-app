@@ -80,7 +80,9 @@ const Page4 = (props, ref) => {
                         onClick={endHandle}
                         size="mini"
                     >
-                        作答完成
+                        {
+                            currentNumber+1 === allNumber ? `作答完成` :`下一幅`
+                        }
                     </Button>
                 </div>
                 {allNumber > 1 ? (

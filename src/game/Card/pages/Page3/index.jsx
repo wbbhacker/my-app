@@ -53,7 +53,10 @@ const Page3 = (props, ref) => {
                         onClick={endHandle}
                         size="minie"
                     >
-                        记忆完成
+                   
+                        {
+                            currentNumber+1 === allNumber ? `记忆完成` :`下一幅`
+                        }
                     </Button>
                 </div>
                 {allNumber > 1 ? (

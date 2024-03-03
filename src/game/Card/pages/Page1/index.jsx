@@ -46,7 +46,7 @@ const Page1 = (props, ref) => {
                             onClick={singleClick}
                             size="mini"
                         >
-                            单副模式
+                            快速扑克
                         </Button>
                     </div>
                     <div>
@@ -56,7 +56,7 @@ const Page1 = (props, ref) => {
                             onClick={mmClick}
                             size="mini"
                         >
-                            多副模式
+                            随机扑克
                         </Button>
                         <Stepper
                             min={2}
