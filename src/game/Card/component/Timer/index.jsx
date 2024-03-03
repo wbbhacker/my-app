@@ -7,7 +7,7 @@ import React, {
     useLayoutEffect,
 } from 'react';
 import styleClass from './index.module.scss';
-import countdown from 'countdown';
+
 import moment from 'moment';
 const Timer = (props, ref) => {
     const [start, setStart] = useState();
