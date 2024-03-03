@@ -37,7 +37,7 @@ const Page1 = (props, ref) => {
                     <p>International Memory Open </p>
                     <p>Memory Training System</p>
                 </div>
-                <div className={styleClass.titlesub}> Speed Cards</div>
+                <div className={styleClass.titlesub}>  Cards</div>
 
                 <div className={styleClass.btn}>
                     <div>
