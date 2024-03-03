@@ -1,15 +1,15 @@
-.card-box{
-    position: relative;
-    width:90vw;
-    height:2rem;
-    margin: auto;
-    overflow-x: auto;
+.card-box {
+  position: relative;
+  width: 90vw;
+  height: 2rem;
+  margin: auto;
+  overflow-x: auto;
 }
-.card-list{
-    position: relative;
-    // overflow: hidden;
-    >div{
-        position: absolute;
-        top:0;
-    }
+.card-list {
+  position: relative;
+  // overflow: hidden;
+  > div {
+    position: absolute;
+    top: 0;
+  }
 }

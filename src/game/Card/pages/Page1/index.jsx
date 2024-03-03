@@ -27,9 +27,9 @@ const Page1 = (props, ref) => {
 
     return (
         <div className={styleClass.page}>
-            <div className={styleClass.header}></div>
+            {/* <div className={styleClass.header}></div> */}
             <div className={styleClass.body}>
-                <div>
+                <div style={{marginTop:'-0.5rem'}}>
                     <img className={styleClass.logo} src={logoIcon} alt="logo"></img>
                 </div>
                 <div className={styleClass.title}>

@@ -125,7 +125,7 @@ const Page5 = (props, ref) => {
             <div className={styleClass.body}>
                 <div className={styleClass.logo}>
                     <img className={styleClass.logoicon} src={logoIcon} alt="logo"></img>
-                    <span>IMO</span>
+                    {/* <span>IMO</span> */}
                 </div>
                 <div className={styleClass.result}>
                     <div className={styleClass.item}>
