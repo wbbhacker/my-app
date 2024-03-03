@@ -11,6 +11,9 @@ import styleClass from './index.module.scss';
 import CardBoxResult from '../../component/CardBoxResult';
 import { Button } from 'antd-mobile';
 
+import logoIcon from '../../component/img/log.jpg'
+
+
 const cardsSe = [];
 for (let i = 0; i <= 51; i++) {
     cardsSe.push(i);
@@ -121,7 +124,7 @@ const Page5 = (props, ref) => {
             </div>
             <div className={styleClass.body}>
                 <div className={styleClass.logo}>
-                    <img src="" alt="logo"></img>
+                    <img className={styleClass.logoicon} src={logoIcon} alt="logo"></img>
                     <span>IMO</span>
                 </div>
                 <div className={styleClass.result}>

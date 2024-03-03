@@ -9,6 +9,7 @@ import React, {
 import _ from 'lodash';
 import styleClass from './index.module.scss';
 import { Button, Stepper } from 'antd-mobile';
+import logoIcon from '../../component/img/log.jpg'
 
 const Page1 = (props, ref) => {
     const { singleCb } = props;
@@ -29,7 +30,7 @@ const Page1 = (props, ref) => {
             <div className={styleClass.header}></div>
             <div className={styleClass.body}>
                 <div>
-                    <img src="" alt="logo"></img>
+                    <img className={styleClass.logo} src={logoIcon} alt="logo"></img>
                 </div>
                 <div className={styleClass.title}>
                     <p>IMO</p>
