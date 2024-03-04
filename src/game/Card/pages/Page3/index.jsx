@@ -31,7 +31,6 @@ const Page3 = (props, ref) => {
         []
     );
     useEffect(() => {
-        console.log(currentNumber !== 0);
         if (props.sequence.length > 0) {
             setSequence(props.sequence);
         }
@@ -74,7 +73,7 @@ const Page3 = (props, ref) => {
                         </span>
                         副
                     </div>
-                ) : null}
+                ) : <div></div>}
                 <div>
                     {currentNumber !== 0 ? (
                         <Button

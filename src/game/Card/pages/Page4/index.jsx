@@ -38,8 +38,6 @@ const Page4 = (props, ref) => {
 
     useEffect(() => {
         if (curSequence) {
-            console.log('shezhi');
-            console.log(curSequence);
             setSequence(curSequence);
         }
     }, [curSequence]);
@@ -109,7 +107,7 @@ const Page4 = (props, ref) => {
                         </span>
                         副
                     </div>
-                ) : null}
+                ) : <div></div>}
                 <div>
                     {currentNumber !== 0 ? (
                         <Button
