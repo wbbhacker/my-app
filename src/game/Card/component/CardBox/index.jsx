@@ -45,8 +45,13 @@ function CardBox(props, ref) {
 
   useLayoutEffect(() => {
     if (cardSequence.length > 0) {
-      boxRef.current.scrollLeft =
-        listRef.current.children[cardSequence.length - 1].offsetLeft;
+      if (selectedCard !== undefined) {
+        setSelectedCard(undefined);
+        setOp(0);
+      } else {
+        boxRef.current.scrollLeft =
+          listRef.current.children[cardSequence.length - 1].offsetLeft;
+      }
     }
   }, [cardSequence]);
 
@@ -75,23 +80,23 @@ function CardBox(props, ref) {
             if (op === 0) {
               onCb(cardSequence[selectedCard]);
               cardSequence.splice(selectedCard, 1, CardIdx);
-              setSelectedCard(undefined);
+              //   setSelectedCard(undefined);
             } else {
               console.log(op);
               if (op === -1) {
                 //后插
                 cardSequence.splice(selectedCard + 1, 0, CardIdx);
                 setCardSequence([...cardSequence]);
-                setSelectedCard(undefined);
-                setOp(0);
+                // setSelectedCard(undefined);
+                // setOp(0);
               }
 
               if (op === 1) {
                 //后插
                 cardSequence.splice(selectedCard, 0, CardIdx);
                 setCardSequence([...cardSequence]);
-                setSelectedCard(undefined);
-                setOp(0);
+                // setSelectedCard(undefined);
+                // setOp(0);
               }
             }
           }
@@ -174,6 +179,7 @@ function CardBox(props, ref) {
               {cardSequence[idx] !== undefined ? (
                 <ReactHammer
                   onDoubleTap={() => {
+                    if (onlyShow) return;
                     handleDoubleTap(Card, idx);
                   }}
                   onPress={() => {
