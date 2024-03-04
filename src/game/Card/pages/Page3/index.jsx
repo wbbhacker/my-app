@@ -14,9 +14,11 @@ import Timer from '../../component/Timer';
 import CardBox from '../../component/CardBox';
 
 const Page3 = (props, ref) => {
-    const { onEnd, currentNumber, allNumber } = props;
+    const { onNext, currentNumber, allNumber } = props;
     const [sequence, setSequence] = useState([]);
     const timerRef = useRef();
+    /*********************hooks*********************/
+
     useImperativeHandle(
         ref,
         () => {
@@ -34,12 +36,23 @@ const Page3 = (props, ref) => {
         }
     }, [props.sequence]);
 
-    // 上下副牌切换
+    /*********************callback*********************/
+    const [last, setLast] = useState(false);
+    useEffect(() => {
+        if (currentNumber !== undefined && allNumber !== undefined) {
+            setLast(currentNumber + 1 === allNumber);
+        }
+    }, [currentNumber, allNumber]);
 
+    // 上下副牌切换
     const nextHandle = () => {
-        timerRef.current.end((m) => {
-            onEnd(m);
-        });
+        if (last) {
+            timerRef.current.end((m) => {
+                onNext(m);
+            });
+        } else {
+            onNext();
+        }
     };
 
     const prevHandle = () => {};
@@ -74,9 +87,7 @@ const Page3 = (props, ref) => {
                         onClick={nextHandle}
                         size="mini"
                     >
-                        {currentNumber + 1 === allNumber
-                            ? `记忆完成`
-                            : `下一幅`}
+                        {last ? `记忆完成` : `下一幅`}
                     </Button>
                 </div>
             </div>

@@ -23,18 +23,10 @@ const Card = (props) => {
     const [page3Show, setPage3Show] = useState(false);
     const page3Ref = useRef();
 
-    useEffect(() => {
-        // page3Ref.current.start();
-    }, []);
-
     /******************** page4 *******************/
 
     const [page4Show, setPage4Show] = useState(false);
     const page4Ref = useRef();
-
-    useEffect(() => {
-        // page4Ref.current.start();
-    }, []);
 
     /******************** page5 *******************/
 
@@ -46,10 +38,6 @@ const Card = (props) => {
         }`;
         console.log(t);
     };
-
-    useEffect(() => {
-        // page5Ref.current.start();
-    }, []);
 
     /******************** 逻辑 *******************/
 
@@ -104,19 +92,29 @@ const Card = (props) => {
     // page3 逻辑
     const [sequence, setSequence] = useState([]);
 
-    const page3End = (m) => {
-        let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
-            m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
-        }`;
+    const page3Next = (m) => {
         let m1;
-        console.log(t);
-        if (!memoryTime) {
+        if (m) {
+            let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
+                m.milliseconds() < 100
+                    ? `0${m.milliseconds()}`
+                    : m.milliseconds()
+            }`;
             m1 = m;
+
             setMemoryTime(m);
-        } else {
-            m1 = memoryTime.add(m);
-            setMemoryTime(m1);
         }
+
+        // let m1;
+        // console.log(t);
+        // if (!memoryTime) {
+        //     m1 = m;
+        //     setMemoryTime(m);
+        // } else {
+        //     m1 = memoryTime.add(m);
+        //     setMemoryTime(m1);
+        // }
+
         let len = memoryArray.length;
 
         console.log(currentNumber);
@@ -212,7 +210,7 @@ const Card = (props) => {
             {page3Show ? (
                 <Page3
                     ref={page3Ref}
-                    onEnd={page3End}
+                    onNext={page3Next}
                     sequence={sequence}
                     currentNumber={currentNumber}
                     allNumber={memoryArray.length}

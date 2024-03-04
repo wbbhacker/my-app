@@ -14,10 +14,6 @@ import Timer from '../../component/Timer';
 import CardBox from '../../component/CardBox';
 import CardSquare from '../../component/CardSquare';
 
-const cardsSe = [];
-for (let i = 0; i <= 51; i++) {
-    cardsSe.push(i);
-}
 const Page4 = (props, ref) => {
     const { onEnd, currentNumber, allNumber } = props;
     const [sequence, setSequence] = useState([]);
@@ -31,9 +27,7 @@ const Page4 = (props, ref) => {
         () => {
             return {
                 start: (cb) => {
-                    // const arr = _.shuffle(cardsSe);
                     timerRef.current.start();
-                    // setSequence(arr);
                 },
             };
         },
@@ -41,19 +35,6 @@ const Page4 = (props, ref) => {
     );
 
     /*********************callback*********************/
-    // 作答完成
-    const endHandle = () => {
-        let arr = [];
-
-        cardBoxRef.current.end((a) => {
-            arr = a;
-        });
-        timerRef.current.end((m) => {
-            onEnd(m, arr);
-        });
-
-        cardSquareRef.current.end();
-    };
 
     // 卡牌选择
     const cardSelect = (Card, cardIdx) => {
@@ -65,6 +46,23 @@ const Page4 = (props, ref) => {
     // 卡牌回填
     const onCb = (idx) => {
         cardSquareRef.current.add(idx);
+    };
+
+    // 作答完成
+    // 上一副
+    const prevHandle = () => {};
+    // 下一幅
+    const nextHandle = () => {
+        let arr = [];
+
+        cardBoxRef.current.end((a) => {
+            arr = a;
+        });
+        timerRef.current.end((m) => {
+            onEnd(m, arr);
+        });
+
+        cardSquareRef.current.end();
     };
 
     return (
@@ -86,7 +84,7 @@ const Page4 = (props, ref) => {
                     <Button
                         color="primary"
                         fill="outline"
-                        onClick={endHandle}
+                        onClick={prevHandle}
                         size="mini"
                     >
                         {`上一副`}
@@ -94,7 +92,7 @@ const Page4 = (props, ref) => {
                     <Button
                         color="primary"
                         fill="outline"
-                        onClick={endHandle}
+                        onClick={nextHandle}
                         size="mini"
                     >
                         {currentNumber + 1 === allNumber
