@@ -73,18 +73,6 @@ const Page4 = (props, ref) => {
                 <div>
                     <Timer ref={timerRef}></Timer>
                 </div>
-                <div>
-                    <Button
-                        color="primary"
-                        fill="outline"
-                        onClick={endHandle}
-                        size="mini"
-                    >
-                        {
-                            currentNumber+1 === allNumber ? `作答完成` :`下一幅`
-                        }
-                    </Button>
-                </div>
                 {allNumber > 1 ? (
                     <div className={styleClass.number}>
                         第
@@ -94,6 +82,26 @@ const Page4 = (props, ref) => {
                         副
                     </div>
                 ) : null}
+                <div>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={endHandle}
+                        size="mini"
+                    >
+                        {`上一副`}
+                    </Button>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={endHandle}
+                        size="mini"
+                    >
+                        {currentNumber + 1 === allNumber
+                            ? `作答完成`
+                            : `下一幅`}
+                    </Button>
+                </div>
             </div>
             <div className={styleClass.body}>
                 <CardBox

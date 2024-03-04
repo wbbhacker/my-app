@@ -85,7 +85,9 @@ const Card = (props) => {
         }
         setMemoryArray(aaa);
         setPage1Show(false);
-        setPage2Show(true);
+        // TODO MOCK
+        // setPage2Show(true);
+        setPage3Show(true);
         console.log(idx);
     };
 

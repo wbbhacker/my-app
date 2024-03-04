@@ -34,30 +34,21 @@ const Page3 = (props, ref) => {
         }
     }, [props.sequence]);
 
-    const endHandle = () => {
+    // 上下副牌切换
+
+    const nextHandle = () => {
         timerRef.current.end((m) => {
             onEnd(m);
         });
     };
+
+    const prevHandle = () => {};
 
     return (
         <div className={styleClass.page}>
             <div className={styleClass.header}>
                 <div>
                     <Timer ref={timerRef}></Timer>
-                </div>
-                <div>
-                    <Button
-                        color="primary"
-                        fill="outline"
-                        onClick={endHandle}
-                        size="minie"
-                    >
-                   
-                        {
-                            currentNumber+1 === allNumber ? `记忆完成` :`下一幅`
-                        }
-                    </Button>
                 </div>
                 {allNumber > 1 ? (
                     <div className={styleClass.number}>
@@ -68,6 +59,26 @@ const Page3 = (props, ref) => {
                         副
                     </div>
                 ) : null}
+                <div>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={prevHandle}
+                        size="mini"
+                    >
+                        {`上一副`}
+                    </Button>
+                    <Button
+                        color="primary"
+                        fill="outline"
+                        onClick={nextHandle}
+                        size="mini"
+                    >
+                        {currentNumber + 1 === allNumber
+                            ? `记忆完成`
+                            : `下一幅`}
+                    </Button>
+                </div>
             </div>
             <div className={styleClass.body}>
                 <CardBox sequence={sequence} onlyShow={true}></CardBox>
