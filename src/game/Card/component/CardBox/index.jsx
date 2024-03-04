@@ -80,6 +80,7 @@ function CardBox(props, ref) {
             if (op === 0) {
               onCb(cardSequence[selectedCard]);
               cardSequence.splice(selectedCard, 1, CardIdx);
+              setCardSequence([...cardSequence]);
               //   setSelectedCard(undefined);
             } else {
               console.log(op);
