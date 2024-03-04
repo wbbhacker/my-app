@@ -13,3 +13,9 @@
     top: 0;
   }
 }
+.op {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
