@@ -138,6 +138,12 @@ const Card = (props) => {
         }
     };
 
+    const page3Prev = () => {
+        const prev = currentNumber - 1;
+        setSequence(memoryArray[prev]);
+        setCurrentNumber(prev);
+    };
+
     useEffect(() => {
         if (page3Show) {
             page3Ref.current.start();
@@ -211,6 +217,7 @@ const Card = (props) => {
                 <Page3
                     ref={page3Ref}
                     onNext={page3Next}
+                    onPrev={page3Prev}
                     sequence={sequence}
                     currentNumber={currentNumber}
                     allNumber={memoryArray.length}

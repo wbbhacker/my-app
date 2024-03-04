@@ -14,7 +14,7 @@ import Timer from '../../component/Timer';
 import CardBox from '../../component/CardBox';
 
 const Page3 = (props, ref) => {
-    const { onNext, currentNumber, allNumber } = props;
+    const { onNext, onPrev, currentNumber, allNumber } = props;
     const [sequence, setSequence] = useState([]);
     const timerRef = useRef();
     /*********************hooks*********************/
@@ -31,6 +31,7 @@ const Page3 = (props, ref) => {
         []
     );
     useEffect(() => {
+        console.log(currentNumber !== 0);
         if (props.sequence.length > 0) {
             setSequence(props.sequence);
         }
@@ -55,7 +56,9 @@ const Page3 = (props, ref) => {
         }
     };
 
-    const prevHandle = () => {};
+    const prevHandle = () => {
+        onPrev();
+    };
 
     return (
         <div className={styleClass.page}>
@@ -73,14 +76,17 @@ const Page3 = (props, ref) => {
                     </div>
                 ) : null}
                 <div>
-                    <Button
-                        color="primary"
-                        fill="outline"
-                        onClick={prevHandle}
-                        size="mini"
-                    >
-                        {`上一副`}
-                    </Button>
+                    {currentNumber !== 0 ? (
+                        <Button
+                            color="primary"
+                            fill="outline"
+                            onClick={prevHandle}
+                            size="mini"
+                        >
+                            {`上一副`}
+                        </Button>
+                    ) : null}
+
                     <Button
                         color="primary"
                         fill="outline"
