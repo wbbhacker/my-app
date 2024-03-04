@@ -16,7 +16,16 @@ const CardSquare = (props, ref) => {
     const [selectedCard, setSelectedCard] = useState({});
 
     /*********************callback*********************/
-    const { onClick } = props;
+    const { onClick, sequence } = props;
+    useEffect(() => {
+        if (sequence) {
+            let o = {};
+            sequence.forEach((item) => {
+                o[item] = true;
+            });
+            setSelectedCard(o);
+        }
+    }, [sequence]);
     // 选择
 
     const handleTap = (Card, idx) => {

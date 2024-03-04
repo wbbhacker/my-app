@@ -105,27 +105,18 @@ const Card = (props) => {
             setMemoryTime(m);
         }
 
-        // let m1;
-        // console.log(t);
-        // if (!memoryTime) {
-        //     m1 = m;
-        //     setMemoryTime(m);
-        // } else {
-        //     m1 = memoryTime.add(m);
-        //     setMemoryTime(m1);
-        // }
-
         let len = memoryArray.length;
 
         console.log(currentNumber);
 
         if (currentNumber === len - 1) {
-            console.log('总用时：');
             let t = `${m1.hours()}.${m1.minutes()}.${m1.seconds()}.${
                 m1.milliseconds() < 100
                     ? `0${m1.milliseconds()}`
                     : m1.milliseconds()
             }`;
+
+            console.log('记忆总用时：');
             console.log(t);
 
             setPage3Show(false);
@@ -151,6 +142,7 @@ const Card = (props) => {
     }, [page3Show]);
 
     // page4 逻辑
+    const [curSequence, setCurSequence] = useState([]);
 
     useEffect(() => {
         if (page4Show) {
@@ -158,24 +150,37 @@ const Card = (props) => {
         }
     }, [page4Show]);
 
-    const page4End = (m, arr) => {
-        let t = `${m.hours()}.${m.minutes()}.${m.seconds()}.${
-            m.milliseconds() < 100 ? `0${m.milliseconds()}` : m.milliseconds()
-        }`;
+    const page4Prev = (arr) => {
+        if (arr) {
+            //最后一个逻辑
+            if (!answerArray[currentNumber]) {
+                answerArray.push(arr);
+            } else {
+                answerArray[currentNumber] = arr;
+            }
+        }
+        const prev = currentNumber - 1;
+        setCurSequence([...answerArray[prev]]);
+        setCurrentNumber(prev);
+    };
 
+    const page4Next = (m, arr) => {
         let m1;
-        console.log(t);
-        answerArray.push(arr);
-        if (!answerTime) {
+
+        if (m) {
             m1 = m;
             setAnswerTime(m);
-        } else {
-            m1 = answerTime.add(m);
-            setAnswerTime(m1);
         }
+
+        if (!answerArray[currentNumber]) {
+            answerArray.push(arr);
+        } else {
+            answerArray[currentNumber] = arr;
+        }
+
         let len = memoryArray.length;
         if (currentNumber === len - 1) {
-            console.log('总用时：');
+            console.log('作答总用时：');
 
             let t = `${m1.hours()}.${m1.minutes()}.${m1.seconds()}.${
                 m1.milliseconds() < 100
@@ -183,16 +188,19 @@ const Card = (props) => {
                     : m1.milliseconds()
             }`;
             console.log(t);
-            console.log(answerArray);
+
             setPage4Show(false);
             setPage5Show(true);
             setCurrentNumber(0);
         } else {
             const next = currentNumber + 1;
+            if (!answerArray[next]) {
+                setCurSequence([]);
+            } else {
+                setCurSequence([...answerArray[next]]);
+            }
             setCurrentNumber(next);
         }
-        console.log(t);
-        console.log(arr);
     };
 
     // page5 逻辑
@@ -227,7 +235,9 @@ const Card = (props) => {
                 <Page4
                     currentNumber={currentNumber}
                     ref={page4Ref}
-                    onEnd={page4End}
+                    onNext={page4Next}
+                    onPrev={page4Prev}
+                    curSequence={curSequence}
                     allNumber={memoryArray.length}
                 ></Page4>
             ) : null}

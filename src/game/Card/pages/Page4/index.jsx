@@ -15,12 +15,14 @@ import CardBox from '../../component/CardBox';
 import CardSquare from '../../component/CardSquare';
 
 const Page4 = (props, ref) => {
-    const { onEnd, currentNumber, allNumber } = props;
+    const { onNext, onPrev, currentNumber, allNumber, curSequence } = props;
     const [sequence, setSequence] = useState([]);
     const cardBoxRef = useRef();
 
     const timerRef = useRef();
     const cardSquareRef = useRef();
+
+    /*********************callback*********************/
 
     useImperativeHandle(
         ref,
@@ -33,6 +35,14 @@ const Page4 = (props, ref) => {
         },
         []
     );
+
+    useEffect(() => {
+        if (curSequence) {
+            console.log('shezhi');
+            console.log(curSequence);
+            setSequence(curSequence);
+        }
+    }, [curSequence]);
 
     /*********************callback*********************/
 
@@ -49,18 +59,38 @@ const Page4 = (props, ref) => {
     };
 
     // 作答完成
+    const [last, setLast] = useState(false);
+    useEffect(() => {
+        if (currentNumber !== undefined && allNumber !== undefined) {
+            setLast(currentNumber + 1 === allNumber);
+        }
+    }, [currentNumber, allNumber]);
+
     // 上一副
-    const prevHandle = () => {};
+    const prevHandle = () => {
+        if (last) {
+            cardBoxRef.current.end((a) => {
+                onPrev(a);
+            });
+        } else {
+            onPrev();
+        }
+    };
     // 下一幅
     const nextHandle = () => {
-        let arr = [];
-
-        cardBoxRef.current.end((a) => {
-            arr = a;
-        });
-        timerRef.current.end((m) => {
-            onEnd(m, arr);
-        });
+        if (last) {
+            let arr = [];
+            cardBoxRef.current.end((a) => {
+                arr = a;
+            });
+            timerRef.current.end((m) => {
+                onNext(m, arr);
+            });
+        } else {
+            cardBoxRef.current.end((a) => {
+                onNext(null, a);
+            });
+        }
 
         cardSquareRef.current.end();
     };
@@ -81,23 +111,23 @@ const Page4 = (props, ref) => {
                     </div>
                 ) : null}
                 <div>
-                    <Button
-                        color="primary"
-                        fill="outline"
-                        onClick={prevHandle}
-                        size="mini"
-                    >
-                        {`上一副`}
-                    </Button>
+                    {currentNumber !== 0 ? (
+                        <Button
+                            color="primary"
+                            fill="outline"
+                            onClick={prevHandle}
+                            size="mini"
+                        >
+                            {`上一副`}
+                        </Button>
+                    ) : null}
                     <Button
                         color="primary"
                         fill="outline"
                         onClick={nextHandle}
                         size="mini"
                     >
-                        {currentNumber + 1 === allNumber
-                            ? `作答完成`
-                            : `下一幅`}
+                        {last ? `作答完成` : `下一幅`}
                     </Button>
                 </div>
             </div>
@@ -109,6 +139,7 @@ const Page4 = (props, ref) => {
                 ></CardBox>
                 <div className={styleClass.line}></div>
                 <CardSquare
+                    sequence={sequence}
                     ref={cardSquareRef}
                     onClick={cardSelect}
                     onAdd={onAdd}
