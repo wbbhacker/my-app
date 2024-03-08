@@ -38,6 +38,7 @@ const Page5 = (props, ref) => {
       return {
         calc: (cb) => {
           console.log("计算结果：");
+          console.log(answerArray);
           let m = [];
           memoryArray.forEach((item) => {
             m = m.concat(item);
@@ -76,12 +77,19 @@ const Page5 = (props, ref) => {
             }
             setScore(s);
           } else {
-            let len = memoryArray.length;
             console.log("多副牌");
+
+            let lastCard = -1;
+            answerArray.forEach((item, idx) => {
+              if (item.length !== 0) {
+                lastCard = idx;
+              }
+            });
+            console.log(`lastCard：${lastCard}`);
             memoryArray.forEach((item, idx) => {
               let ss = 0;
 
-              if (idx + 1 !== len) {
+              if (idx !== lastCard) {
                 let flag = true;
                 for (let i = 0; i < item.length; i++) {
                   if (item[i] !== answerArray[idx][i]) {
@@ -92,9 +100,8 @@ const Page5 = (props, ref) => {
                   ss = 52;
                 }
               } else {
-                console.log("wang>>>>");
-                let lastAnswer = answerArray[len - 1];
-                let lastMemory = memoryArray[len - 1];
+                let lastAnswer = answerArray[lastCard];
+                let lastMemory = memoryArray[lastCard];
                 let lasts = 0;
                 let errorLast = 0;
                 lastAnswer.forEach((item, idx) => {
@@ -104,9 +111,7 @@ const Page5 = (props, ref) => {
                     errorLast += 1;
                   }
                 });
-                console.log(lastAnswer);
-                console.log(errorLast);
-                console.log(lasts);
+
                 if (errorLast >= 2) {
                   ss = 0;
                 } else if (errorLast === 1) {
